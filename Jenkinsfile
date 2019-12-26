@@ -1,6 +1,6 @@
-def IMAGE_NAME = ""
-def CONTAINER_NAME = ""
-def IQ_NAME = ""
+IMAGE_NAME="host.docker.internal:19443/grafana/grafana:6.5.1"
+CONTAINER_NAME="grafana"
+IQ_NAME="grafana"
 
 pipeline {
     agent any
@@ -22,13 +22,13 @@ pipeline {
             }
         }
 
-        // stage('Policy Evaluation'){
-        //     steps {
-        //         //download the image and do a scan in IQ
-        //         sh 'docker save -o ' + CONTAINER_NAME + '.tar ' + IMAGE_NAME
+        stage('Policy Evaluation'){
+            steps {
+                //download the image and do a scan in IQ
+                sh 'docker save -o ' + CONTAINER_NAME + '.tar ' + IMAGE_NAME
 
-        //         nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: IQ_NAME, iqScanPatterns: [[scanPattern: CONTAINER_NAME + '.tar']], iqStage: 'build', jobCredentialsId: ''
-        //     }
-        // }
+                nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: IQ_NAME, iqScanPatterns: [[scanPattern: CONTAINER_NAME + '.tar']], iqStage: 'build', jobCredentialsId: ''
+            }
+        }
     }
 }
