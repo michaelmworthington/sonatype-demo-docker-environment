@@ -1,6 +1,6 @@
-// def IMAGE_NAME = "host.docker.internal:19443/sonatype/nexus-iq-server:latest"
-// def CONTAINER_NAME = "nexus-iq-server"
-// def IQ_NAME = "iq-server-docker"
+def IMAGE_NAME = ""
+def CONTAINER_NAME = ""
+def IQ_NAME = ""
 
 pipeline {
     agent any
