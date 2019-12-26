@@ -13,7 +13,7 @@ pipeline {
         stage('Build'){
             steps {
                 //pull the new latest
-                sh "docker-compose -p docker-compose pull --quiet " + CONTAINER_NAME
+                //sh "docker-compose -p docker-compose pull --quiet " + CONTAINER_NAME
                 //stop and remove the current container
                 sh 'docker-compose -p docker-compose stop --timeout 120 ' + CONTAINER_NAME + ' || /usr/bin/true'
                 sh 'docker-compose -p docker-compose rm --force ' + CONTAINER_NAME + ' || /usr/bin/true'
