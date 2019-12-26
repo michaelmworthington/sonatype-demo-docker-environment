@@ -1,6 +1,6 @@
-def IMAGE_NAME = ""
-def CONTAINER_NAME = ""
-def IQ_NAME = ""
+IMAGE_NAME="host.docker.internal:19443/postgres:11.5"
+CONTAINER_NAME="postgres"
+IQ_NAME="postgres"
 
 pipeline {
     agent any
@@ -22,13 +22,13 @@ pipeline {
             }
         }
 
-        // stage('Policy Evaluation'){
-        //     steps {
-        //         //download the image and do a scan in IQ
-        //         sh 'docker save -o ' + CONTAINER_NAME + '.tar ' + IMAGE_NAME
+        stage('Policy Evaluation'){
+            steps {
+                //download the image and do a scan in IQ
+                sh 'docker save -o ' + CONTAINER_NAME + '.tar ' + IMAGE_NAME
 
-        //         nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: IQ_NAME, iqScanPatterns: [[scanPattern: CONTAINER_NAME + '.tar']], iqStage: 'build', jobCredentialsId: ''
-        //     }
-        // }
+                nexusPolicyEvaluation failBuildOnNetworkError: false, iqApplication: IQ_NAME, iqScanPatterns: [[scanPattern: CONTAINER_NAME + '.tar']], iqStage: 'build', jobCredentialsId: ''
+            }
+        }
     }
 }
