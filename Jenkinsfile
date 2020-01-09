@@ -21,9 +21,9 @@ pipeline {
                 sh 'docker-compose -p docker-compose stop --timeout 120 ' + CONTAINER_NAME + ' || /usr/bin/true'
                 sh 'docker-compose -p docker-compose rm --force ' + CONTAINER_NAME + ' || /usr/bin/true'
                 //start the new container
-                sh 'docker-compose -p docker-compose up -d --build' + CONTAINER_NAME
+                sh 'docker-compose -p docker-compose up -d --build ' + CONTAINER_NAME
                 //push new image
-                sh 'docker-compose -p docker-compose push' + CONTAINER_NAME
+                sh 'docker-compose -p docker-compose push ' + CONTAINER_NAME
             }
         }
 
